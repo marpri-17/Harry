@@ -1,5 +1,10 @@
 # Harry
 Explore all the spell from Harry Potter in this app building with material-ui
+
+## Dependencies
+- npm
+- [Material-ui](https://material-ui.com/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
