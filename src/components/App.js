@@ -1,9 +1,8 @@
 import React from 'react';
 import ResultCard from './ResultCard';
 import { Typography, Grid, Paper, TextField, } from '@material-ui/core';
+import getSpellsFromServer from '../services/getSpellsFromServer';
 import '../styles/App.css';
-// const keyForPotterApi = $2a$10$9XwMOrQ/SFxrwkZcUiuzTez37kkckl3TeyJuVhrPQlBjA554U37G6
-
 
 class App extends React.Component {
   constructor(props) {
@@ -11,37 +10,23 @@ class App extends React.Component {
 
 
     this.state = {
-      spells: [{
-        description: "eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda",
-        name: "Wingardium Leviosa",
-        picture: "pic",
-        type: "Spell",
-        id: "spellS0",
-      }, {
-        description: "eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda",
-        name: "Wingardium Leviosa",
-        picture: "pic",
-        type: "Charm",
-        id: "spellS1",
-      }, {
-        description: "eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda",
-        name: "Wingardium Leviosa",
-        picture: "pic",
-        type: "Spell",
-        id: "spellS2",
-      }, {
-        description: "eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda",
-        name: "Wingardium Leviosa",
-        picture: "pic",
-        type: "Spell",
-        id: "spellS3",
-      }
-      ]
+      spells: [],
+      isLoading: true,
     };
+
+
+  }
+
+  componentDidMount() {
+    getSpellsFromServer()
+      .then(fetchedSpells => this.setState({
+        spells: fetchedSpells,
+        isLoading: false,
+      }));
   }
 
   render() {
-    const { spells } = this.state;
+    const { spells, isLoading } = this.state;
     return (
       <div className="App">
         <Grid >
@@ -51,11 +36,13 @@ class App extends React.Component {
           <Typography variant="h3">Hechizos</Typography>
           <TextField autoFocus={true} id="spellUserQuery" label="Buscar el hechizo" type="search" variant="filled" htmlFor="search for spell's name" />
           <Grid>
-            {spells.map(spell => {
-              return (
-                <ResultCard spell={spell} />
-              )
-            })}
+            {(isLoading) ?
+              <Typography variant="caption">"Cargando"</Typography> :
+              spells.map(spell => {
+                return (
+                  <ResultCard spell={spell} key={spell.id} />
+                )
+              })}
           </Grid>
         </Paper>
       </div>
