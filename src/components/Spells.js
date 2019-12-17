@@ -37,6 +37,14 @@ class Spells extends React.Component {
         console.log(types)
     }
 
+    renderSpellsList(spells) {
+        return (spells.map(spell => {
+            return (
+                <ResultCard spell={spell} key={spell.id} />
+            )
+        }))
+    }
+
 
     render() {
         const { spells, isLoading } = this.state
@@ -49,15 +57,10 @@ class Spells extends React.Component {
             <Paper component="section">
                 <Typography variant="h3">Hechizos</Typography>
                 <TextField autoFocus={true} id="spellUserQuery" label="Buscar el hechizo" type="search" variant="filled" htmlFor="search for spell's name" />
-                <Grid>
+                <Grid direction="row" container={true} item={true} justify="space-evenly" alignItems="center" xs={12}>
                     {(isLoading) ?
-                        <Typography variant="caption">"Cargando"</Typography> :
-                        spells.map(spell => {
-                            debugger;
-                            return (
-                                <ResultCard spell={spell} key={spell.id} />
-                            )
-                        })}
+                        <Typography variant="title">Cargando</Typography> : this.renderSpellsList(spells)
+                    }
                 </Grid>
             </Paper>
         )

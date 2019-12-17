@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, CssBaseline } from '@material-ui/core';
 import Spells from './Spells';
 import '../styles/App.css';
 
@@ -12,6 +12,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <CssBaseline />
         <Grid >
           <Typography variant="h1">Potter Wiki</Typography>
         </Grid>

@@ -1,19 +1,25 @@
 import React from 'react';
 import charmPic from '../images/spellPic.jpg';
 import enchancementPic from '../images/enchancement.jpg';
-import { Card, CardMedia, Typography, CardActionArea } from '@material-ui/core';
+import { Card, CardMedia, Typography, CardActionArea, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
 const ResultCard = ({ spell }) => {
     const useStyles = makeStyles({
         card: {
-
-            maxWidth: "25%",
+            width: "50%",
+            height: "auto",
+            maxWidth: "200px",
+            margin: "2%"
         },
         pic: {
             height: 60
+        },
+        bodyfont: {
+            fontSize: "100%"
         }
+
     })
 
     const classes = useStyles();
@@ -30,9 +36,10 @@ const ResultCard = ({ spell }) => {
                     title="Encantamiento o hechizo"
                 />
                 <Typography component="h4" variant="h5">{spell.name}</Typography>
-                <Typography variant="subtitle1" paragraph={true}>{spell.type}</Typography>
+                <Typography variant="overline" >{spell.type}</Typography>
+                <Divider />
+                <Typography variant="body1" paragraph={true} className={classes.bodyfont}>{spell.description}</Typography>
             </CardActionArea>
-            <Typography variant="body2" component="p">{spell.description}</Typography>
         </Card>)
 }
 
