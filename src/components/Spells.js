@@ -59,7 +59,7 @@ class Spells extends React.Component {
                 <TextField autoFocus={true} id="spellUserQuery" label="Buscar el hechizo" type="search" variant="filled" htmlFor="search for spell's name" />
                 <Grid direction="row" container={true} item={true} justify="space-evenly" alignItems="center" xs={12}>
                     {(isLoading) ?
-                        <Typography variant="title">Cargando</Typography> : this.renderSpellsList(spells)
+                        <Typography variant="h5">Cargando</Typography> : this.renderSpellsList(spells)
                     }
                 </Grid>
             </Paper>
