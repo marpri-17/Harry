@@ -1,8 +1,11 @@
 import React from 'react';
-import ResultCard from './ResultCard';
-import SpellsFilter from './SpellsFilter';
+import SpellsFilters from './SpellsFilters';
+import ResultList from './ResultList';
 import getSpellsFromServer from '../services/getSpellsFromServer';
-import { Typography, Grid, Paper, TextField } from '@material-ui/core';
+import { Typography, Grid, Paper } from '@material-ui/core';
+
+
+
 
 
 class Spells extends React.Component {
@@ -13,9 +16,11 @@ class Spells extends React.Component {
             spells: [],
             isLoading: true,
             nameUserQuery: "",
+            // limit: 20,
+            // offset: 0, 
         };
-        this.renderSpellTypeImage = this.renderSpellTypeImage.bind(this);
         this.handleSearchByName = this.handleSearchByName.bind(this);
+        // this.handlePagination = this.handlePagination.bind(this);
 
     }
 
@@ -26,56 +31,51 @@ class Spells extends React.Component {
                 isLoading: false,
             }
             ));
-
+        console.log(this.props)
     }
+
+    // handlePagination() {
+    //     const { limit, offset } = this.state;
+
+    // }
+
     handleSearchByName(e) {
         this.setState({
             nameUserQuery: e.target.value.toLowerCase(),
         })
     }
 
-    renderSpellTypeImage() {
-        const { spells } = this.state;
-        let types = [];
-        for (let spell of spells) {
-            if (types.includes(spell.type.toLowerCase())) {
-            } else {
-                types.push(spell.type.toLowerCase())
-            }
-        }
-        // console.log(types)
+    handleSelectByType(e) {
+        console.log(e.target.value);
     }
 
     renderSpellsList(spells) {
         const { nameUserQuery } = this.state
         spells = spells.filter(spell => spell.name.toLowerCase().includes(nameUserQuery))
-        return (spells.map(spell => {
-            return (
-                <ResultCard spell={spell} key={spell.id} />
-            )
-        }))
+        return (
+            <ResultList spells={spells} />
+        )
     }
 
 
     render() {
-        const { spells, isLoading } = this.state
 
-        if (spells.length !== 0) {
-            this.renderSpellTypeImage();
-        }
-        console.log(this.state)
+        const { spells, isLoading } = this.state;
+
+        const classes = this.props;
         return (
             <Paper component="section">
                 <Typography variant="h3">Hechizos</Typography>
-                <Grid direction="row" container={true} wrap="nowrap">
-                    <SpellsFilter handleSearchByName={this.handleSearchByName} />
-                    <Grid direction="row" container={true} item={true} justify="space-evenly" alignItems="center" xs={12}>
-                        {(isLoading) ?
-                            <Typography variant="h5">Cargando</Typography> : this.renderSpellsList(spells)
-                        }
-                    </Grid>
+                <Grid className={`${classes.classes}`} direction="row" container={true} item={true} wrap="nowrap" xs={12} justify="space-evenly">
+                    {(isLoading) ?
+                        <Typography variant="h5" align="center">Cargando</Typography> :
+                        <>
+                            <SpellsFilters handleSearchByName={this.handleSearchByName} spells={spells} />
+                            {this.renderSpellsList(spells)}
+                        </>
+                    }
                 </Grid>
-            </Paper>
+            </Paper >
         )
     }
 }

@@ -44,19 +44,21 @@ const ResultCard = ({ spell }) => {
 
     }
 
-    return (< Card className={classes.card} >
-        <CardActionArea>
-            <CardMedia
-                className={classes.pic}
-                image={SelectPic(spell.type)}
-                title="Encantamiento o hechizo"
-            />
-            <Typography component="h4" variant="h5">{spell.name}</Typography>
-            <Typography variant="overline" >{spell.type}</Typography>
-            <Divider />
-            <Typography variant="body1" paragraph={true} className={classes.bodyfont}>{spell.description}</Typography>
-        </CardActionArea>
-    </Card >)
+    return (
+        < Card className={classes.card} >
+            <CardActionArea>
+                <CardMedia
+                    className={classes.pic}
+                    image={SelectPic(spell.type)}
+                    title="Encantamiento o hechizo"
+                />
+                <Typography component="h4" variant="h5">{spell.name}</Typography>
+                <Typography variant="overline" >{spell.type}</Typography>
+                <Divider />
+                <Typography variant="body1" paragraph={true} className={classes.bodyfont}>{spell.description}</Typography>
+            </CardActionArea>
+        </Card >
+    )
 }
 
 export default ResultCard;

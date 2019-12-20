@@ -1,25 +1,36 @@
 import React from 'react';
-import { Typography, Grid, CssBaseline, Container } from '@material-ui/core';
+import { Typography, CssBaseline, Container } from '@material-ui/core';
 import Spells from './Spells';
+import { makeStyles } from '@material-ui/core/styles';
 import '../styles/App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const App = () => {
+  const useStyles = makeStyles({
+    root: {
+      //height: "100%",
+      overflow: "auto",
+      // backgroundColor: "#32a852",
+    },
+    title: {
+      color: "white",
+      padding: "2%"
+    },
+    maingrid: {
+      //height: "100%",
+      maxHeight: "70vh"
+    }
+  })
 
+  const classes = useStyles();
 
-  render() {
-    return (
-      <Container className="App" >
-        <CssBaseline />
-        <Grid >
-          <Typography variant="h1">Potter Wiki</Typography>
-        </Grid>
-        <Spells />
-      </Container>
-    );
-  }
+  return (
+    <Container className="App">
+      <CssBaseline />
+      <Typography component="h1" variant="h1" className={`${classes.title}`} paragraph={true}>Potter Wiki</Typography>
+      <Spells classes={classes.maingrid} />
+    </Container>
+  );
+
 }
 
 
