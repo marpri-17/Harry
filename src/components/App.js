@@ -7,6 +7,7 @@ import '../styles/App.css';
 const App = () => {
   const useStyles = makeStyles({
     root: {
+      width: "100%",
       //height: "100%",
       overflow: "auto",
       // backgroundColor: "#32a852",
@@ -24,10 +25,10 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <Container className="App">
+    <Container className="App" maxWidth={false}>
       <CssBaseline />
       <Typography component="h1" variant="h1" className={`${classes.title}`} paragraph={true}>Potter Wiki</Typography>
-      <Spells classes={classes.maingrid} />
+      <Spells maingrid={classes.maingrid} />
     </Container>
   );
 

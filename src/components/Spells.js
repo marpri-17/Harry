@@ -66,7 +66,7 @@ class Spells extends React.Component {
         return (
             <Paper component="section">
                 <Typography variant="h3">Hechizos</Typography>
-                <Grid className={`${classes.classes}`} direction="row" container={true} item={true} wrap="nowrap" xs={12} justify="space-evenly">
+                <Grid className={`${classes.maingrid}`} direction="row" container={true} item={true} wrap="nowrap" xs={12} justify="space-evenly">
                     {(isLoading) ?
                         <Typography variant="h5" align="center">Cargando</Typography> :
                         <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Select, MenuItem, InputLabel, Box, FormControl, Grid } from '@material-ui/core';
+import { TextField, Select, MenuItem, InputLabel, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 function getDifferentsTypes(spells) {
@@ -17,9 +17,9 @@ function getDifferentsTypes(spells) {
 const spellsFilters = ({ handleSearchByName, spells, handleSelectByType }) => {
 
     const styles = makeStyles({
-        body: {
-            flexGrow: 1,
-        },
+        // body: {
+        //     flexGrow: 1
+        // },
         inputname: {
             marginTop: "5%"
         },
@@ -37,7 +37,7 @@ const spellsFilters = ({ handleSearchByName, spells, handleSelectByType }) => {
             <Select id="spellsSelect" variant="standard" autoWidth={true} placeholder="Spell Type"   >
                 {types.map(type => {
                     return (
-                        <MenuItem value={type} key={`${type}`} divider="true">{type}</MenuItem>
+                        <MenuItem value={type} key={`${type}`} divider={true}>{type}</MenuItem>
                     )
                 })}
             </Select>

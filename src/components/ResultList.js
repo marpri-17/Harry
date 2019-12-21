@@ -1,6 +1,6 @@
 import React from 'react';
 import ResultCard from './ResultCard';
-import { Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 
 const ResultList = (props) => {
@@ -17,13 +17,14 @@ const ResultList = (props) => {
 
     const classes = styles();
     return (
-        <Grid className={classes.containerList}>
+        <Grid className={classes.containerList} container item >
             {spells.map(spell => {
                 return (
                     <ResultCard spell={spell} key={spell.id} />
                 )
             })}
         </Grid>
+
     )
 
 }
