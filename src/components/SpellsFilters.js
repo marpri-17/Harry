@@ -17,14 +17,15 @@ function getDifferentsTypes(spells) {
 const spellsFilters = ({ handleSearchByName, spells, handleSelectByType }) => {
 
     const styles = makeStyles({
-        // body: {
-        //     flexGrow: 1
-        // },
+
         inputname: {
             marginTop: "5%"
         },
         inputtype: {
             marginTop: "15%"
+        },
+        font: {
+            color: "white",
         }
 
     })
@@ -34,10 +35,10 @@ const spellsFilters = ({ handleSearchByName, spells, handleSelectByType }) => {
     const renderSpellTypeSelect = () => {
         const types = getDifferentsTypes(spells);
         return (
-            <Select id="spellsSelect" variant="standard" autoWidth={true} placeholder="Spell Type"   >
+            <Select id="spellsSelect" variant="standard" placeholder="Spell Type" onChange={handleSelectByType} defaultValue={types[0]} className={classes.font}>
                 {types.map(type => {
                     return (
-                        <MenuItem value={type} key={`${type}`} divider={true}>{type}</MenuItem>
+                        <MenuItem value={(type === "all") ? "" : type} key={`${type}`} divider >{type}</MenuItem>
                     )
                 })}
             </Select>
@@ -48,9 +49,9 @@ const spellsFilters = ({ handleSearchByName, spells, handleSelectByType }) => {
     return (spells.length !== 0) ?
         <Box className={classes.body} >
 
-            <TextField autoFocus={true} id="spellUserQuery" label="Buscar el hechizo" type="search" variant="filled" htmlFor="search for spell's name" onChange={handleSearchByName} />
+            <TextField autoFocus={true} id="spellUserQuery" label="Buscar el hechizo" type="search" variant="filled" htmlFor="search for spell's name" onChange={handleSearchByName} className={classes.font} />
 
-            <InputLabel id="spellsSelect">Filter by spell type</InputLabel>
+            <InputLabel id="spellsSelect" className={classes.font}>Filter by spell type</InputLabel>
             {renderSpellTypeSelect()}
         </Box>
         : ""

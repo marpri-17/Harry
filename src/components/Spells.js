@@ -16,11 +16,12 @@ class Spells extends React.Component {
             spells: [],
             isLoading: true,
             nameUserQuery: "",
+            typeUserQuery: "",
             // limit: 20,
             // offset: 0, 
         };
         this.handleSearchByName = this.handleSearchByName.bind(this);
-        // this.handlePagination = this.handlePagination.bind(this);
+        this.handleSelectByType = this.handleSelectByType.bind(this);
 
     }
 
@@ -31,7 +32,6 @@ class Spells extends React.Component {
                 isLoading: false,
             }
             ));
-        console.log(this.props)
     }
 
     // handlePagination() {
@@ -46,12 +46,17 @@ class Spells extends React.Component {
     }
 
     handleSelectByType(e) {
+        this.setState({
+            typeUserQuery: e.target.value,
+        })
         console.log(e.target.value);
     }
 
     renderSpellsList(spells) {
-        const { nameUserQuery } = this.state
-        spells = spells.filter(spell => spell.name.toLowerCase().includes(nameUserQuery))
+        const { nameUserQuery, typeUserQuery } = this.state;
+        spells = spells.filter(spell => {
+            return spell.name.toLowerCase().includes(nameUserQuery)
+        }).filter(spell => (typeUserQuery === "") ? true : spell.type.toLowerCase() === typeUserQuery)
         return (
             <ResultList spells={spells} />
         )
@@ -64,13 +69,13 @@ class Spells extends React.Component {
 
         const classes = this.props;
         return (
-            <Paper component="section">
-                <Typography variant="h3">Hechizos</Typography>
+            <Paper component="section" className={classes.mainSurface}>
+                <Typography variant="h3" className={classes.mainText}>Hechizos</Typography>
                 <Grid className={`${classes.maingrid}`} direction="row" container={true} item={true} wrap="nowrap" xs={12} justify="space-evenly">
                     {(isLoading) ?
-                        <Typography variant="h5" align="center">Cargando</Typography> :
+                        <Typography variant="h5" align="center" className={classes.mainText}>Cargando</Typography> :
                         <>
-                            <SpellsFilters handleSearchByName={this.handleSearchByName} spells={spells} />
+                            <SpellsFilters handleSearchByName={this.handleSearchByName} spells={spells} handleSelectByType={this.handleSelectByType} />
                             {this.renderSpellsList(spells)}
                         </>
                     }
